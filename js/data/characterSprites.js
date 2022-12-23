@@ -27,7 +27,7 @@ const characterSprites = {
       },
       spell: {
         projectile: {
-          imageSrc: "../assets/Projectiles/heal.png",
+          imageSrc: "./assets/Projectiles/heal.png",
           frames: { max: 1 },
           offset: {
             x: 0,
@@ -74,7 +74,7 @@ const characterSprites = {
       },
       spell: {
         projectile: {
-          imageSrc: "../assets/Projectiles/elfire.png",
+          imageSrc: "./assets/Projectiles/elfire.png",
           frames: { max: 1 },
           offset: {
             x: 0,
@@ -303,7 +303,7 @@ const characterSprites = {
       },
       spell: {
         projectile: {
-          imageSrc: "../assets/Projectiles/thunder.png",
+          imageSrc: "./assets/Projectiles/thunder.png",
           frames: { max: 1 },
           offset: {
             x: 0,

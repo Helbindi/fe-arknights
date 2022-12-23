@@ -1,0 +1,116 @@
+To-do:
+
+Status: ***DONE***
+1. Enemies should stop moving forward when they encounter a Character unit.
+    1a. Swap to ATTACK sprite and damage Character unit.
+    2a. Determine if attack or continue moving depending on Character unit's CURRENT and MAX block value.
+    3b. increment character block count
+    4c. when/where to remove characters block count
+
+Status: Early Figma Design
+3. UI -> React + Figma
+    3a. Character Selection Screen: pick unit to deploy at using CP (cost points)
+    3b. Generate CP over time.
+    3c. Player Health (Amount of enemies units allowed to pass the end line). Take 1 damage per enemy.
+    3d. Timer?
+    3e. Character Profile Page. Show Profile image, stats, attack range, block, lore.
+    3f. Game HP Threshhold:
+            5 -> 3 = NinoFace = https://cdn.frankerfacez.com/emoticon/220000/2
+            2 = NiNoSleep = https://cdn.frankerfacez.com/emoticon/649654/2
+            1 = NinoTriggered = https://cdn.betterttv.net/emote/5c4e0570d3608d75429cc06a/3x
+            0 = NiNOOO = https://cdn.7tv.app/emote/62fdd9d2fc8c5e68bef07371/2x.webp
+
+            NinoWalk = https://cdn.betterttv.net/emote/5e8ba3a109989e5cdff54f3f/2x
+
+Status: ***DONE***
+4. Add more Character units
+    4a. Melee vs Ranged? how to differentiate? isRanged boolean?
+    4b. Hitbox: Ranged = 3x3 tile & Melee = 1x2)
+    4c. Multiple spells(Projectile/Explosion)
+    4d. Total: 8-9 Character units
+        Ephraim, Eirika, Myrrh, Lilina, Sophia, Melady, Roy, Nino, Hector, Lyn
+
+Status: ***DONE***
+5. Spawn 2 waves of enemies?
+    5a. Enemy class hard coded to spawn from waypoints.js
+    5b. How to keep track of which enemy wave character is attacking?
+        ** Melee characters should not be able to hit units above and below them.
+           Ranged units aare able to hit multiple rows
+
+Status: ***DONE***
+- Melee Character hitbox/attackrange
+
+Status: ***DONE***
+Healer characters
+
+Individual Character Stats?
+
+Lilina (Anima)
+-----------
+Health: 100/100
+Power: 40/50
+Defense: 10/50
+Block: 1
+
+Nino (Anima)
+-----------
+Health: 100/100
+Power: 40/50
+Defense: 10/50
+Block: 1
+
+Sophia (Dark)
+-----------
+Health: 100/100
+Power: 40/50
+Defense: 10/50
+Block: 1
+
+Hector (Axe)
+-----------
+Health: 100/100
+Power: 40/50
+Defense: 40/50
+Block: 3
+
+Myrrh (Dragonstone)
+-----------
+Health: 100/100
+Power: 50/50
+Defense: 40/50
+Block: 3
+
+Ephraim (Lance)
+-----------
+Health: 100/100
+Power: 40/50
+Defense: 30/50
+Block: 2
+
+Melady (Lance)
+-----------
+Health: 100/100
+Power: 40/50
+Defense: 30/50
+Block: 2
+
+Eirika (Sword)
+-----------
+Health: 100/100
+Power: 30/50
+Defense: 30/50
+Block: 1
+
+Lyn (Sword)
+-----------
+Health: 100/100
+Power: 40/50
+Defense: 20/50
+Block: 1
+
+Roy (Sword)
+-----------
+Health: 100/100
+Power: 30/50
+Defense: 30/50
+Block: 1

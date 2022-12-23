@@ -1,0 +1,124 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+
+  color: white;
+  background-color: gray;
+  background-image: url("./assets/background2.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.game-window {
+  width: 1280px;
+  height: 768px;
+
+  position: relative;
+  box-shadow: 5px 10px 20px hsl(0, 0%, 0%, 0.7);
+
+  border: 7px solid;
+  border-image-source: linear-gradient(45deg, white, black);
+  border-image-slice: 1;
+}
+
+.lives-remaining {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 128px;
+
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.deployment-points {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  position: absolute;
+  bottom: 128px;
+  right: 0;
+  width: 128px;
+
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.character-selection {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  position: absolute;
+  bottom: 0;
+  height: 128px;
+  width: 100%;
+
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.character-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: inherit;
+  width: 100%;
+
+  border: 3px solid white;
+  border-right: none;
+}
+
+.character-card:last-child {
+  border-right: 3px solid white;
+}
+
+.character-card[aria-selected="true"] {
+  background-color: rgb(255, 215, 0, 0.6);
+}
+
+.card-info {
+  position: relative;
+
+  width: 100%;
+}
+
+.info {
+  top: 5px;
+  left: 5px;
+  position: absolute;
+  cursor: pointer;
+}
+
+.weapon {
+  top: 5px;
+  right: 25px;
+  position: absolute;
+}
+
+.deploy-cost {
+  top: 5px;
+  right: 5px;
+  position: absolute;
+  margin: 0;
+}
+
+.icon-img {
+  height: 20px;
+}
+
+.portrait-img {
+  height: 64px;
+}
+
+img {
+  height: 64px;
+}

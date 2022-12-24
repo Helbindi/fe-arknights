@@ -1,3 +1,7 @@
+* {
+  font-family: "Press Start 2P", cursive;
+}
+
 body {
   display: flex;
   align-items: center;
@@ -52,6 +56,28 @@ body {
   background-color: rgba(0, 0, 0, 0.6);
 }
 
+.detailed-info {
+  position: absolute;
+  top: 0;
+  width: 320px;
+  height: 638px;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
+.name-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
 .character-selection {
   display: flex;
   justify-content: flex-start;
@@ -100,15 +126,17 @@ body {
 
 .weapon {
   top: 5px;
-  right: 25px;
+  right: 35px;
   position: absolute;
 }
 
 .deploy-cost {
-  top: 5px;
+  top: 9px;
   right: 5px;
   position: absolute;
   margin: 0;
+
+  font-size: 0.8rem;
 }
 
 .icon-img {
@@ -119,6 +147,35 @@ body {
   height: 64px;
 }
 
+.atk-range-img {
+  height: 128px;
+}
+
+.series-img {
+  height: 50px;
+}
+
+.detailed-portrait {
+  height: 128px;
+}
+
 img {
   height: 64px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  font-size: 1.2rem;
+  color: white;
+  background: none;
+  border: none;
+
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: rgb(255, 115, 115);
 }

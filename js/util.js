@@ -1,3 +1,6 @@
+/**
+ * Utility functions for Sprites
+ */
 function getSpriteData(name) {
   switch (name.toLowerCase()) {
     case "natasha":
@@ -58,7 +61,9 @@ function getSpell(name) {
   }
 }
 
-// Characters Util
+/**
+ * Utility functions for Characters
+ */
 function getRandomCharacter() {
   const index = Math.floor(Math.random() * 1);
   const arr = ["nino"];
@@ -137,7 +142,9 @@ function removeBlocking(character, enemiesA, enemiesB) {
   }
 }
 
-// Enemy Util
+/**
+ * Utility functions for Enemies
+ */
 function generateRandomEnemy() {
   const index = Math.floor(Math.random() * 4);
   const arr = ["bonesword", "bonespear", "zombie", "mogall"];
@@ -250,11 +257,13 @@ function handleEnemyDeath(target, enemies) {
   }
 }
 
-// Update UI components
+/**
+ * Update/Initialize UI components
+ */
 function updateLivesUI(value) {
   const ui = document.getElementById("lives-remaining");
   const image = document.createElement("img");
-  const text = document.createElement("h1");
+  const text = document.createElement("p");
 
   if (value <= 0) {
     value = 0;
@@ -278,7 +287,7 @@ function updateLivesUI(value) {
           ui.replaceChild(image, child);
         }
         break;
-      case "H1":
+      case "P":
         {
           ui.replaceChild(text, child);
         }
@@ -295,12 +304,12 @@ function updatePointsUI(value) {
     value = 99;
   }
   const ui = document.getElementById("deployment-points");
-  const text = document.createElement("h1");
+  const text = document.createElement("p");
 
   text.textContent = value;
 
   ui.childNodes.forEach((child) => {
-    if (child.nodeName === "H1") {
+    if (child.nodeName === "P") {
       ui.replaceChild(text, child);
     }
   });
@@ -309,7 +318,7 @@ function updatePointsUI(value) {
 function initialLivesUI(value) {
   const ui = document.getElementById("lives-remaining");
   const image = document.createElement("img");
-  const text = document.createElement("h1");
+  const text = document.createElement("p");
 
   image.src = "https://cdn.frankerfacez.com/emoticon/220000/2";
   text.textContent = value;
@@ -321,7 +330,7 @@ function initialLivesUI(value) {
 function initialPointsUI(value) {
   const ui = document.getElementById("deployment-points");
   const image = document.createElement("img");
-  const text = document.createElement("h1");
+  const text = document.createElement("p");
 
   image.src = "https://cdn.betterttv.net/emote/5e8ba3a109989e5cdff54f3f/2x";
   text.textContent = value;
@@ -350,6 +359,8 @@ function createCard(name, values) {
 
   const infoImg = document.createElement("img");
   infoImg.className = "icon-img info";
+  infoImg.id = "info";
+  infoImg.ariaExpanded = false;
   const weaponImg = document.createElement("img");
   weaponImg.className = "icon-img weapon";
   const deployCost = document.createElement("p");
@@ -372,6 +383,82 @@ function createCard(name, values) {
   return card;
 }
 
+function createDetailedInfo(name) {
+  // check if a detailed info window of a previous character exists, remove it
+  const detailedInfo = document.getElementsByClassName("detailed-info")[0];
+  if (detailedInfo) {
+    detailedInfo.remove();
+  }
+
+  const character = characterInfo[name];
+  console.log(character);
+
+  const ui = document.getElementById("game-window");
+  const section = document.createElement("section");
+  const portrait = document.createElement("img");
+
+  const nameInfo = document.createElement("div");
+  const weapon = document.createElement("img");
+  const characterName = document.createElement("p");
+  const series = document.createElement("img");
+
+  const statsInfo = document.createElement("div");
+  const health = document.createElement("p");
+  const power = document.createElement("p");
+  const defence = document.createElement("p");
+  const block = document.createElement("p");
+
+  const attackRange = document.createElement("img");
+
+  const close = document.createElement("button");
+  close.className = "close-btn";
+  close.textContent = "x";
+  close.addEventListener("click", () => {
+    section.remove();
+  });
+
+  section.className = "detailed-info";
+  section.setAttribute("character", name);
+  portrait.className = "detailed-portrait";
+
+  nameInfo.className = "name-info";
+  weapon.className = "icon-img";
+  characterName.className = "character-name";
+  series.className = "series-img img";
+
+  statsInfo.className = "stats-info";
+
+  attackRange.className = "atk-range-img";
+
+  portrait.src = character.portraitSrc;
+  attackRange.src = character.attackRangeSrc;
+  weapon.src = character.weaponSrc;
+  series.src = character.seriesSrc;
+
+  characterName.textContent = character.name;
+  health.textContent = `Health: ${character.stats.health}`;
+  power.textContent = `Power: ${character.stats.power}`;
+  defence.textContent = `Defence: ${character.stats.defence}`;
+  block.textContent = `Block: ${character.stats.maxBlock}`;
+
+  nameInfo.append(weapon);
+  nameInfo.append(characterName);
+  nameInfo.append(series);
+
+  statsInfo.append(health);
+  statsInfo.append(power);
+  statsInfo.append(defence);
+  statsInfo.append(block);
+
+  section.append(close);
+  section.append(portrait);
+  section.append(nameInfo);
+  section.append(statsInfo);
+  section.append(attackRange);
+
+  ui.append(section);
+}
+
 function getSelectedCharacter() {
   let name = "";
   section.childNodes.forEach((card) => {
@@ -387,6 +474,7 @@ initialLivesUI(5);
 initialPointsUI(0);
 initialCharacters();
 
+// Toggle aria-selected for character cards
 const section = document.getElementById("character-selection");
 section.childNodes.forEach((card) => {
   card.addEventListener("click", (event) => {
@@ -399,3 +487,28 @@ section.childNodes.forEach((card) => {
     });
   });
 });
+
+// Toggle aria-expanded for detailed character screen
+const infoDetails = document.getElementsByClassName("info");
+for (const info of infoDetails) {
+  info.addEventListener("click", (event) => {
+    info.setAttribute("aria-expanded", true);
+    // find character name
+    const name = info.parentNode.parentNode.getAttribute("character");
+    createDetailedInfo(name);
+
+    // reset aria-expoanded for all other infos
+    for (const other of infoDetails) {
+      if (other !== info && other.ariaExpanded === "true") {
+        other.setAttribute("aria-expanded", false);
+      }
+    }
+  });
+}
+
+const detailedInfo = document.getElementsByClassName("detailed-info")[0];
+if (detailedInfo) {
+  detailedInfo.childNodes[0].addEventListener("click", () => {
+    detailedInfo.remove();
+  });
+}

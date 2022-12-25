@@ -1,3 +1,10 @@
+:root {
+  --transparent-bg: rgba(0, 0, 0, 0.6);
+  --transparent-bg-selection: rgb(255, 215, 0, 0.6);
+  --text-clr: rgb(255, 255, 255);
+  --text-hover: rgb(255, 115, 115);
+}
+
 * {
   font-family: "Press Start 2P", cursive;
 }
@@ -10,8 +17,9 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
+  overflow: scroll;
 
-  color: white;
+  color: var(--text-clr);
   background-color: gray;
   background-image: url("./assets/background2.png");
   background-position: center;
@@ -30,6 +38,43 @@ body {
   border-image-slice: 1;
 }
 
+.btn-group {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 64px;
+  padding: 0 5px 0 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  background-color: var(--transparent-bg);
+}
+
+button {
+  color: var(--text-clr);
+  background: transparent;
+  border: none;
+}
+
+.help-btn {
+  margin: 0 5px 0 5px;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.help-btn:hover {
+  color: var(--text-hover);
+}
+
+.pause-img {
+  margin: 0 5px 0 5px;
+  height: 48px;
+  background: transparent;
+  cursor: pointer;
+}
+
 .lives-remaining {
   display: flex;
   justify-content: space-evenly;
@@ -40,7 +85,21 @@ body {
   left: 0;
   width: 128px;
 
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--transparent-bg);
+}
+
+.enemies-killed {
+  position: absolute;
+  top: 0;
+  left: 500px;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 1em 0 1em;
+  background-color: var(--transparent-bg);
 }
 
 .deployment-points {
@@ -53,7 +112,7 @@ body {
   right: 0;
   width: 128px;
 
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--transparent-bg);
 }
 
 .detailed-info {
@@ -61,7 +120,7 @@ body {
   top: 0;
   width: 320px;
   height: 638px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--transparent-bg);
 
   display: flex;
   flex-direction: column;
@@ -72,7 +131,7 @@ body {
 
 .name-info {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
@@ -88,7 +147,7 @@ body {
   height: 128px;
   width: 100%;
 
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--transparent-bg);
 }
 
 .character-card {
@@ -108,7 +167,7 @@ body {
 }
 
 .character-card[aria-selected="true"] {
-  background-color: rgb(255, 215, 0, 0.6);
+  background-color: var(--transparent-bg-selection);
 }
 
 .card-info {
@@ -169,7 +228,7 @@ img {
   right: 10px;
 
   font-size: 1.2rem;
-  color: white;
+  color: var(--text-clr);
   background: none;
   border: none;
 
@@ -177,5 +236,5 @@ img {
 }
 
 .close-btn:hover {
-  color: rgb(255, 115, 115);
+  color: var(--text-hover);
 }

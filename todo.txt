@@ -43,6 +43,11 @@ Status: ***DONE***
 Status: ***DONE***
 Healer characters
 
+
+GameOver Screen
+Victory Screen
+Level Design? 3 Waves, clear 3/3 => victory
+
 Individual Character Stats?
 
 Lilina (Anima)

@@ -19,7 +19,19 @@
   <body>
     <section class="game-window" id="game-window">
       <canvas></canvas>
+      <div class="btn-group">
+        <button class="help-btn" id="help-btn">?</button>
+        <button class="pause-btn" id="pause-btn">
+          <img
+            class="pause-img"
+            id="pause-img"
+            src="./assets/pause.png"
+            alt="pause-btn"
+          />
+        </button>
+      </div>
       <div class="lives-remaining" id="lives-remaining"></div>
+      <div class="enemies-killed" id="enemies-killed"></div>
       <div class="deployment-points" id="deployment-points"></div>
       <section class="character-selection" id="character-selection"></section>
     </section>

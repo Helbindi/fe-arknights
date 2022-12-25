@@ -245,21 +245,21 @@ function checkBlockStatus(enemy, characters, placementTiles) {
   }
 }
 
-// On enemy death, remove from Canvas and check if a character was blocking it
-function handleEnemyDeath(target, enemies) {
-  const enemyIndex = enemies.findIndex((enemy) => {
-    return target === enemy;
-  });
-
-  // remove enemy from canvas if death detected
-  if (enemyIndex > -1) {
-    enemies.splice(enemyIndex, 1);
-  }
-}
-
 /**
  * Update/Initialize UI components
  */
+function createLivesUI(value) {
+  const ui = document.getElementById("lives-remaining");
+  const image = document.createElement("img");
+  const text = document.createElement("p");
+
+  image.src = "https://cdn.frankerfacez.com/emoticon/220000/2";
+  text.textContent = value;
+
+  ui.append(image);
+  ui.append(text);
+}
+
 function updateLivesUI(value) {
   const ui = document.getElementById("lives-remaining");
   const image = document.createElement("img");
@@ -299,6 +299,18 @@ function updateLivesUI(value) {
   });
 }
 
+function createPointsUI(value) {
+  const ui = document.getElementById("deployment-points");
+  const image = document.createElement("img");
+  const text = document.createElement("p");
+
+  image.src = "https://cdn.betterttv.net/emote/5e8ba3a109989e5cdff54f3f/2x";
+  text.textContent = value;
+
+  ui.append(text);
+  ui.append(image);
+}
+
 function updatePointsUI(value) {
   if (value > 99) {
     value = 99;
@@ -315,31 +327,29 @@ function updatePointsUI(value) {
   });
 }
 
-function initialLivesUI(value) {
-  const ui = document.getElementById("lives-remaining");
-  const image = document.createElement("img");
+function createKilledUI(value, maxValue) {
+  const ui = document.getElementById("enemies-killed");
   const text = document.createElement("p");
 
-  image.src = "https://cdn.frankerfacez.com/emoticon/220000/2";
-  text.textContent = value;
+  text.textContent = `Killed: ${value} / ${maxValue}`;
 
-  ui.append(image);
   ui.append(text);
 }
 
-function initialPointsUI(value) {
-  const ui = document.getElementById("deployment-points");
-  const image = document.createElement("img");
+function updateKilledUI(value, maxValue) {
+  const ui = document.getElementById("enemies-killed");
   const text = document.createElement("p");
 
-  image.src = "https://cdn.betterttv.net/emote/5e8ba3a109989e5cdff54f3f/2x";
-  text.textContent = value;
+  text.textContent = `Killed: ${value} / ${maxValue}`;
 
-  ui.append(text);
-  ui.append(image);
+  ui.childNodes.forEach((child) => {
+    if (child.nodeName === "P") {
+      ui.replaceChild(text, child);
+    }
+  });
 }
 
-function initialCharacters() {
+function createCharacters() {
   const section = document.getElementById("character-selection");
 
   for (const [key, value] of Object.entries(characterInfo)) {
@@ -391,14 +401,12 @@ function createDetailedInfo(name) {
   }
 
   const character = characterInfo[name];
-  console.log(character);
 
   const ui = document.getElementById("game-window");
   const section = document.createElement("section");
   const portrait = document.createElement("img");
 
   const nameInfo = document.createElement("div");
-  const weapon = document.createElement("img");
   const characterName = document.createElement("p");
   const series = document.createElement("img");
 
@@ -422,7 +430,6 @@ function createDetailedInfo(name) {
   portrait.className = "detailed-portrait";
 
   nameInfo.className = "name-info";
-  weapon.className = "icon-img";
   characterName.className = "character-name";
   series.className = "series-img img";
 
@@ -432,7 +439,6 @@ function createDetailedInfo(name) {
 
   portrait.src = character.portraitSrc;
   attackRange.src = character.attackRangeSrc;
-  weapon.src = character.weaponSrc;
   series.src = character.seriesSrc;
 
   characterName.textContent = character.name;
@@ -441,7 +447,6 @@ function createDetailedInfo(name) {
   defence.textContent = `Defence: ${character.stats.defence}`;
   block.textContent = `Block: ${character.stats.maxBlock}`;
 
-  nameInfo.append(weapon);
   nameInfo.append(characterName);
   nameInfo.append(series);
 
@@ -470,9 +475,7 @@ function getSelectedCharacter() {
   return name;
 }
 
-initialLivesUI(5);
-initialPointsUI(0);
-initialCharacters();
+createCharacters();
 
 // Toggle aria-selected for character cards
 const section = document.getElementById("character-selection");

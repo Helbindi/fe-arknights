@@ -418,7 +418,7 @@ function checkGameOver(animationId) {
     text.style.color = "#FF0000";
     loseImg.src = "https://cdn.7tv.app/emote/62fdd9d2fc8c5e68bef07371/2x.webp";
     loseImg.alt = "Game Over Image";
-    loseImg.className = "defeat-img";
+    loseImg.className = "prompt-img";
 
     prompt.append(text);
     prompt.append(loseImg);
@@ -432,7 +432,7 @@ function checkGameOver(animationId) {
     text.style.color = "#00E400";
     winImg.src = "https://cdn.frankerfacez.com/emoticon/220000/2";
     winImg.alt = "Victory Image";
-    winImg.className = "victory-img";
+    winImg.className = "prompt-img";
 
     prompt.append(text);
     prompt.append(winImg);

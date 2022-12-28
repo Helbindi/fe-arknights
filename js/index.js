@@ -29,7 +29,7 @@ let lives = 5;
 let points = 50;
 let frames = 0;
 let kills = 0;
-let targetKills = 20;
+let targetKills = 30;
 let pause = false;
 
 createLivesUI(lives);
@@ -83,6 +83,19 @@ function animate() {
       tile.update(mouse);
     });
 
+    checkGameOver(animationId);
+
+    // // Game Over if life reaches 0
+    // if (lives === 0) {
+    //   console.log("Game Over");
+    //   cancelAnimationFrame(animationId);
+    // }
+
+    // // Victory if player has reached the target amount of kills
+    // if (kills >= targetKills) {
+    //   cancelAnimationFrame(animationId);
+    // }
+
     // Enemy Wave A
     for (let i = enemiesA.length - 1; i >= 0; i--) {
       const enemy = enemiesA[i];
@@ -109,11 +122,6 @@ function animate() {
         lives -= 1;
         enemiesA.splice(i, 1);
         updateLivesUI(lives);
-
-        if (lives === 0) {
-          console.log("Game Over");
-          cancelAnimationFrame(animationId);
-        }
       }
     }
 
@@ -143,11 +151,6 @@ function animate() {
         lives -= 1;
         enemiesB.splice(i, 1);
         updateLivesUI(lives);
-
-        if (lives === 0) {
-          console.log("Game Over");
-          cancelAnimationFrame(animationId);
-        }
       }
     }
 
@@ -255,42 +258,12 @@ function animate() {
                 switch (projectile.target.wave) {
                   case "A":
                     {
-                      const enemyIndex = enemiesA.findIndex((enemy) => {
-                        return projectile.target === enemy;
-                      });
-
-                      // remove enemy from canvas if death detected
-                      if (enemyIndex > -1) {
-                        enemiesA.splice(enemyIndex, 1);
-
-                        if (points < 99) {
-                          points += 2;
-                          updatePointsUI(points);
-                        }
-
-                        kills += 1;
-                        updateKilledUI(kills, targetKills);
-                      }
+                      handleEnemyDeath(character, enemiesA);
                     }
                     break;
                   case "B":
                     {
-                      const enemyIndex = enemiesB.findIndex((enemy) => {
-                        return projectile.target === enemy;
-                      });
-
-                      // remove enemy from canvas if death detected
-                      if (enemyIndex > -1) {
-                        enemiesB.splice(enemyIndex, 1);
-
-                        if (points < 99) {
-                          points += 2;
-                          updatePointsUI(points);
-                        }
-
-                        kills += 1;
-                        updateKilledUI(kills, targetKills);
-                      }
+                      handleEnemyDeath(character, enemiesB);
                     }
                     break;
                   default:
@@ -324,44 +297,14 @@ function animate() {
             case "A":
               {
                 if (character.target && character.target.health <= 0) {
-                  const enemyIndex = enemiesA.findIndex((enemy) => {
-                    return character.target === enemy;
-                  });
-
-                  // remove enemy from canvas if death detected
-                  if (enemyIndex > -1) {
-                    enemiesA.splice(enemyIndex, 1);
-
-                    if (points < 99) {
-                      points += 2;
-                      updatePointsUI(points);
-                    }
-
-                    kills += 1;
-                    updateKilledUI(kills, targetKills);
-                  }
+                  handleEnemyDeath(character, enemiesA);
                 }
               }
               break;
             case "B":
               {
                 if (character.target && character.target.health <= 0) {
-                  const enemyIndex = enemiesB.findIndex((enemy) => {
-                    return character.target === enemy;
-                  });
-
-                  // remove enemy from canvas if death detected
-                  if (enemyIndex > -1) {
-                    enemiesB.splice(enemyIndex, 1);
-
-                    if (points < 99) {
-                      points += 2;
-                      updatePointsUI(points);
-                    }
-
-                    kills += 1;
-                    updateKilledUI(kills, targetKills);
-                  }
+                  handleEnemyDeath(character, enemiesB);
                 }
               }
               break;
@@ -439,3 +382,60 @@ pauseBtn.addEventListener("click", () => {
     if (lives > 0) animate();
   }
 });
+
+function handleEnemyDeath(character, enemies) {
+  const enemyIndex = enemies.findIndex((enemy) => {
+    return character.target === enemy;
+  });
+
+  // remove enemy from canvas if death detected
+  if (enemyIndex > -1) {
+    enemies.splice(enemyIndex, 1);
+
+    if (points < 99) {
+      points += 2;
+      updatePointsUI(points);
+    }
+
+    kills += 1;
+    updateKilledUI(kills, targetKills);
+  }
+}
+
+function checkGameOver(animationId) {
+  const gameui = document.getElementById("game-window");
+  const prompt = document.createElement("section");
+  const loseImg = document.createElement("img");
+  const winImg = document.createElement("img");
+  const text = document.createElement("h2");
+  prompt.className = "game-prompt";
+  text.className = "prompt-text";
+
+  if (lives <= 0) {
+    cancelAnimationFrame(animationId);
+
+    text.textContent = "Defeat";
+    text.style.color = "#FF0000";
+    loseImg.src = "https://cdn.7tv.app/emote/62fdd9d2fc8c5e68bef07371/2x.webp";
+    loseImg.alt = "Game Over Image";
+    loseImg.className = "defeat-img";
+
+    prompt.append(text);
+    prompt.append(loseImg);
+    gameui.append(prompt);
+  }
+
+  if (kills >= targetKills) {
+    cancelAnimationFrame(animationId);
+
+    text.textContent = "Victory";
+    text.style.color = "#00E400";
+    winImg.src = "https://cdn.frankerfacez.com/emoticon/220000/2";
+    winImg.alt = "Victory Image";
+    winImg.className = "victory-img";
+
+    prompt.append(text);
+    prompt.append(winImg);
+    gameui.append(prompt);
+  }
+}

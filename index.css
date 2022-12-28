@@ -215,7 +215,6 @@ img {
   right: 0px;
   height: 64px;
   padding: 0 5px 0 5px;
-  z-index: 999;
 
   display: flex;
   align-items: center;
@@ -230,7 +229,7 @@ button {
   border: none;
 }
 
-.help-btn {
+/* .help-btn {
   margin: 0 5px 0 5px;
   font-size: 2rem;
   cursor: pointer;
@@ -238,7 +237,7 @@ button {
 
 .help-btn:hover {
   color: var(--text-hover);
-}
+} */
 
 .pause-img {
   margin: 0 5px 0 5px;

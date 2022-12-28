@@ -53,7 +53,7 @@ const characterSprites = {
     isRanged: true,
     stats: {
       health: 100,
-      power: 40,
+      power: 30,
       defence: 10,
       maxBlock: 1,
       cost: 10,
@@ -100,7 +100,7 @@ const characterSprites = {
     isRanged: true,
     stats: {
       health: 100,
-      power: 40,
+      power: 30,
       defence: 10,
       maxBlock: 1,
       cost: 10,
@@ -137,6 +137,53 @@ const characterSprites = {
             y: -32,
           },
           scale: 1.5,
+        },
+      },
+    },
+  },
+  nino: {
+    name: "Nino",
+    isHealer: false,
+    isRanged: true,
+    stats: {
+      health: 100,
+      power: 30,
+      defence: 10,
+      maxBlock: 1,
+      cost: 10,
+    },
+    offset: {
+      x: 28,
+      y: 48,
+    },
+    scale: 1.8,
+    sprites: {
+      idle: {
+        imageSrc: "./assets/Characters/Nino/idle.png",
+        framesMax: 4,
+      },
+      attack: {
+        imageSrc: "./assets/Characters/Nino/attack.png",
+        framesMax: 10,
+      },
+      spell: {
+        projectile: {
+          imageSrc: "./assets/Projectiles/thunder.png",
+          frames: { max: 1 },
+          offset: {
+            x: 0,
+            y: 10,
+          },
+          scale: 0.8,
+        },
+        explosion: {
+          imageSrc: "./assets/Explosions/thunder.png",
+          frames: { max: 3 },
+          offset: {
+            x: 0,
+            y: 0,
+          },
+          scale: 1,
         },
       },
     },
@@ -273,53 +320,6 @@ const characterSprites = {
       attack: {
         imageSrc: "./assets/Characters/Roy/attack.png",
         framesMax: 10,
-      },
-    },
-  },
-  nino: {
-    name: "Nino",
-    isHealer: false,
-    isRanged: true,
-    stats: {
-      health: 100,
-      power: 40,
-      defence: 10,
-      maxBlock: 1,
-      cost: 10,
-    },
-    offset: {
-      x: 28,
-      y: 48,
-    },
-    scale: 1.8,
-    sprites: {
-      idle: {
-        imageSrc: "./assets/Characters/Nino/idle.png",
-        framesMax: 4,
-      },
-      attack: {
-        imageSrc: "./assets/Characters/Nino/attack.png",
-        framesMax: 10,
-      },
-      spell: {
-        projectile: {
-          imageSrc: "./assets/Projectiles/thunder.png",
-          frames: { max: 1 },
-          offset: {
-            x: 0,
-            y: 10,
-          },
-          scale: 0.8,
-        },
-        explosion: {
-          imageSrc: "./assets/Explosions/thunder.png",
-          frames: { max: 3 },
-          offset: {
-            x: 0,
-            y: 0,
-          },
-          scale: 1,
-        },
       },
     },
   },

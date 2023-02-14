@@ -138,6 +138,7 @@ body {
   align-items: center;
   height: inherit;
   width: 100%;
+  cursor: pointer;
 
   border: 3px solid white;
   border-right: none;
